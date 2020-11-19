@@ -1,0 +1,86 @@
+* OTA symbol
+* Defining the OTA schematic here ’ Opamp under test ’
+. subckt Opamp-under-test vinn vinp vout VDD VSS
+***************************************************************
+.include 180nm_bulk.txt
+***************************************************************
+*Circuit Description
+
+. param lambda = 90n
+
+* OTA parameters ( to be modified )
+. param W1 = 1u
+. param W2 = 1u
+. param W3 = 1u
+. param W4 = 1u
+. param W5 = 1u
+. param W6 = 1u
+. param W7 = 1u
+. param W8 = 1u
+. param W9 = 1u
+. param W10 = 1u
+. param W11 = 1u
+. param W12 = 1u
+. param W13 = 1u
+. param W14 = 1u
+. param W15 = 1u
+. param W16 = 1u
+. param W17 = 1u
+. param W18 = 1u
+. param W19 = 1u
+. param W20 = 1u
+. param L = 1u
+* /OTA parameters ( to be modified )
+* OTA schematic (Do not change this )
+M1 i p 2 vinp i n 0 VSS nmos L=L W=W1 AS={4*lambda*W1} PS={2*W1+8*lambda} AD={4*lambda*W1} PD={2*W1+8*lambda}
+M2 i p 1 vinn i n 0 VSS nmos L=L W=W2 AS={4*lambda*W2} PS={2*W2+8*lambda} AD={4*lambda*W2} PD={2*W2+8*lambda}
+M3 i n 2 vinp i p 0 VDD pmos L=L W=W3 AS={4*lambda*W3} PS={2*W3+8*lambda} AD={4*lambda*W3} PD={2*W3+8*lambda}
+M4 i n 1 vinn i p 0 VDD pmos L=L W=W4 AS={4*lambda*W4} PS={2*W4+8*lambda} AD={4*lambda*W4} PD={2*W4+8*lambda}
+M5 i n 0 vbn VSS VSS nmos L=L W=W5 AS={4*lambda*W5} PS={2*W5+8*lambda} AD={4*lambda*W5} PD={2*W5+8*lambda}
+M6 i p 0 vbp VDD VDD pmos L=L W=W6 AS={4*lambda*W6} PS={2*W6+8*lambda} AD={4*lambda*W6} PD={2*W6+8*lambda}
+M7 i p 1 i p 3 VDD VDD pmos L=L W=W7 AS={4*lambda*W7} PS={2*W7+8*lambda} AD={4*lambda*W7} PD={2*W7+8*lambda}
+M8 i p 2 i p 3 VDD VDD pmos L=L W=W8 AS={4*lambda*W8} PS={2*W8+8*lambda} AD={4*lambda*W8} PD={2*W8+8*lambda}
+M9 i p 3 vb1 i p 1 i p 1 pmos L=L W=W9 AS={4*lambda*W9} PS={2*W9+8*lambda} AD={4*lambda*W9} PD={2*W9+8*lambda}
+M10 i p 4 vb1 i p 2 i p 2 pmos L=L W=W10 AS={4*lambda*W10} PS={2*W10+8*lambda} AD={4*lambda*W10} PD={2*W10+8*lambda}
+M11 i n 3 vb3 i p 3 VDD pmos L=L W=W11 AS={4*lambda*W11} PS={2*W11+8*lambda} AD={4*lambda*W11} PD={2*W11+8*lambda}
+M12 i p 3 vb4 i n 3 VSS nmos L=L W=W12 AS={4*lambda*W12} PS={2*W12+8*lambda} AD={4*lambda*W12} PD={2*W12+8*lambda}
+M13 i p 4 vb4 i n 4 VSS nmos L=L W=W13 AS={4*lambda*W13} PS={2*W13+8*lambda} AD={4*lambda*W13} PD={2*W13+8*lambda}
+M14 i n 4 vb3 i p 4 VDD pmos L=L W=W14 AS={4*lambda*W14} PS={2*W14+8*lambda} AD={4*lambda*W14} PD={2*W14+8*lambda}
+M15 i n 3 vb2 i n 1 VSS nmos L=L W=W15 AS={4*lambda*W15} PS={2*W15+8*lambda} AD={4*lambda*W15} PD={2*W15+8*lambda}
+M16 i n 4 vb2 i n 2 VSS nmos L=L W=W16 AS={4*lambda*W16} PS={2*W16+8*lambda} AD={4*lambda*W16} PD={2*W16+8*lambda}
+M17 i n 1 i n 3 VSS VSS nmos L=L W=W17 AS={4*lambda*W17} PS={2*W17+8*lambda} AD={4*lambda*W17} PD={2*W17+8*lambda}
+M18 i n 2 i n 3 VSS VSS nmos L=L W=W18 AS={4*lambda*W18} PS={2*W18+8*lambda} AD={4*lambda*W18} PD={2*W18+8*lambda}
+M19 vout i p 4 VDD VDD pmos L=L W=W19 AS={4*lambda*W19} PS={2*W19+8*lambda} AD={4*lambda*W19} PD={2*W19+8*lambda}
+M20 vout i n 4 VSS VSS nmos L=L W=W20 AS={4*lambda*W20} PS={2*W20+8*lambda} AD={4*lambda*W20} PD={2*W20+8*lambda}
+Cc1 i p 4 vout 4p
+Cc2 i n 4 vout 4p
+* /OTA schematic (Do not change this )
+***************************************************************
+* Adding the load capacitance.
+CL vout VSS 5p
+***************************************************************
+* Control Selection
+.control
+***************************************************************
+* Operating point analysis
+op
+
+
+***************************************************************
+* AC analysis
+ac dec 100 1 100G
+
+***************************************************************
+* Slew Rate analysis
+
+
+***************************************************************
+* Transient analysis
+
+
+***************************************************************
+* Common Mode DC analysis
+
+***************************************************************
+.endc
+. ends
