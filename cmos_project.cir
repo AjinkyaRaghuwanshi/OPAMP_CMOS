@@ -58,6 +58,18 @@ Cc2 i n 4 vout 4p
 ***************************************************************
 * Adding the load capacitance.
 CL vout VSS 5p
+* Adding the biasing sources
+VBP1 vbp VSS dc 1.2
+VBN1 vbn VSS dc 0.5
+VDD1 VDD VSS dc 1.8
+VSS1 VSS GND dc 0
+VB11 vb1 VSS dc 0.5
+VB21 vb2 VSS dc 1.3
+VB31 vb3 VSS dc 0.8
+VB41 vb4 VSS dc 0.9
+* Adding the differential sources
+Vin vinn VSS dc 0.9 ac 0.4
+Vip vinp VSS dc 0.9 ac 0.4
 ***************************************************************
 * Control Selection
 .control
