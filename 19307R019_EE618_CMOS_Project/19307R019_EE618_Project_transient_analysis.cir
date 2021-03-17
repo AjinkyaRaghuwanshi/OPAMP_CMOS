@@ -1,0 +1,124 @@
+** OTA symbol
+** Defining the OTA schematic here ’ Opamp under test ’
+.subckt Opamp1 vinn vinp vout VDD VSS
+***************************************************************
+.include 180nm_bulk.txt
+***************************************************************
+*Circuit Description
+
+.param lambda = 90n
+
+* OTA parameters ( to be modified )
+.param W1 = 37u
+.param W2 = 37u
+.param W3 = 141.176u
+.param W4 = 141.176u
+.param W5 = 0.640u
+.param W6 = 3.064u
+.param W7 = 11.294u
+.param W8 = 11.294u
+.param W9 = 4.002u
+.param W10 = 4.002u
+.param W11 = 0.628u
+.param W12 = 0.142u
+.param W13 = 0.142u
+.param W14 = 0.628u
+.param W15 = 1u
+.param W16 = 1u
+.param W17 = 4u
+.param W18 = 4u
+.param W19 = 480u
+.param W20 = 160u
+.param L = 0.71u
+
+* /OTA parameters ( to be modified )
+* OTA schematic (Do not change this )
+M1 ip2 vinp in0 VSS nmos L=L W=W1 AS={4*lambda*W1} PS={2*W1+8*lambda} AD={4*lambda*W1} PD={2*W1+8*lambda}
+M2 ip1 vinn in0 VSS nmos L=L W=W2 AS={4*lambda*W2} PS={2*W2+8*lambda} AD={4*lambda*W2} PD={2*W2+8*lambda}
+M3 in2 vinp ip0 VDD pmos L=L W=W3 AS={4*lambda*W3} PS={2*W3+8*lambda} AD={4*lambda*W3} PD={2*W3+8*lambda}
+M4 in1 vinn ip0 VDD pmos L=L W=W4 AS={4*lambda*W4} PS={2*W4+8*lambda} AD={4*lambda*W4} PD={2*W4+8*lambda}
+M5 in0 vbn VSS VSS nmos L=L W=W5 AS={4*lambda*W5} PS={2*W5+8*lambda} AD={4*lambda*W5} PD={2*W5+8*lambda}
+M6 ip0 vbp VDD VDD pmos L=L W=W6 AS={4*lambda*W6} PS={2*W6+8*lambda} AD={4*lambda*W6} PD={2*W6+8*lambda}
+M7 ip1 ip3 VDD VDD pmos L=L W=W7 AS={4*lambda*W7} PS={2*W7+8*lambda} AD={4*lambda*W7} PD={2*W7+8*lambda}
+M8 ip2 ip3 VDD VDD pmos L=L W=W8 AS={4*lambda*W8} PS={2*W8+8*lambda} AD={4*lambda*W8} PD={2*W8+8*lambda}
+M9 ip3 vb1 ip1 ip1 pmos L=L W=W9 AS={4*lambda*W9} PS={2*W9+8*lambda} AD={4*lambda*W9} PD={2*W9+8*lambda}
+M10 ip4 vb1 ip2 ip2 pmos L=L W=W10 AS={4*lambda*W10} PS={2*W10+8*lambda} AD={4*lambda*W10} PD={2*W10+8*lambda}
+M11 in3 vb3 ip3 VDD pmos L=L W=W11 AS={4*lambda*W11} PS={2*W11+8*lambda} AD={4*lambda*W11} PD={2*W11+8*lambda}
+M12 ip3 vb4 in3 VSS nmos L=L W=W12 AS={4*lambda*W12} PS={2*W12+8*lambda} AD={4*lambda*W12} PD={2*W12+8*lambda}
+M13 ip4 vb4 in4 VSS nmos L=L W=W13 AS={4*lambda*W13} PS={2*W13+8*lambda} AD={4*lambda*W13} PD={2*W13+8*lambda}
+M14 in4 vb3 ip4 VDD pmos L=L W=W14 AS={4*lambda*W14} PS={2*W14+8*lambda} AD={4*lambda*W14} PD={2*W14+8*lambda}
+M15 in3 vb2 in1 VSS nmos L=L W=W15 AS={4*lambda*W15} PS={2*W15+8*lambda} AD={4*lambda*W15} PD={2*W15+8*lambda}
+M16 in4 vb2 in2 VSS nmos L=L W=W16 AS={4*lambda*W16} PS={2*W16+8*lambda} AD={4*lambda*W16} PD={2*W16+8*lambda}
+M17 in1 in3 VSS VSS nmos L=L W=W17 AS={4*lambda*W17} PS={2*W17+8*lambda} AD={4*lambda*W17} PD={2*W17+8*lambda}
+M18 in2 in3 VSS VSS nmos L=L W=W18 AS={4*lambda*W18} PS={2*W18+8*lambda} AD={4*lambda*W18} PD={2*W18+8*lambda}
+M19 vout ip4 VDD VDD pmos L=L W=W19 AS={4*lambda*W19} PS={2*W19+8*lambda} AD={4*lambda*W19} PD={2*W19+8*lambda}
+M20 vout in4 VSS VSS nmos L=L W=W20 AS={4*lambda*W20} PS={2*W20+8*lambda} AD={4*lambda*W20} PD={2*W20+8*lambda}
+Cc1 ip4 vout 2p
+Cc2 in4 vout 2p
+* /OTA schematic (Do not change this )
+***************************************************************
+** Adding the load capacitance.
+CL vout VSS 5p
+****Reference generator param****
+.param W21 = 0.0876u
+.param W22 = 0.7884u
+.param W23 = 0.4366u
+.param W24 = 0.4366u
+.param W25 = 4.366u
+.param W26 = 4.366u
+.param W27 = 4.366u
+.param W28 = 4.366u
+.param W29 = 4.366u
+.param Lref = 2u
+
+****Reference generator mosfet****
+M21 a a VSS VSS nmos L=Lref W=W21 AS={4*lambda*W21} PS={2*W21+8*lambda} AD={4*lambda*W21} PD={2*W21+8*lambda}
+M22 b a s22 VSS nmos L=Lref W=W22 AS={4*lambda*W22} PS={2*W22+8*lambda} AD={4*lambda*W22} PD={2*W22+8*lambda}
+M23 a b VDD VDD pmos L=Lref W=W23 AS={4*lambda*W23} PS={2*W23+8*lambda} AD={4*lambda*W23} PD={2*W23+8*lambda}
+M24 b b VDD VDD pmos L=Lref W=W24 AS={4*lambda*W24} PS={2*W24+8*lambda} AD={4*lambda*W24} PD={2*W24+8*lambda}
+M25 vbn b VDD VDD pmos L=Lref W=W25 AS={4*lambda*W25} PS={2*W25+8*lambda} AD={4*lambda*W25} PD={2*W25+8*lambda}
+M26 vb1 b VDD VDD pmos L=Lref W=W26 AS={4*lambda*W26} PS={2*W26+8*lambda} AD={4*lambda*W26} PD={2*W26+8*lambda}
+M27 vb2 b VDD VDD pmos L=Lref W=W27 AS={4*lambda*W27} PS={2*W27+8*lambda} AD={4*lambda*W27} PD={2*W27+8*lambda}
+M28 vb3 b VDD VDD pmos L=Lref W=W28 AS={4*lambda*W28} PS={2*W28+8*lambda} AD={4*lambda*W28} PD={2*W28+8*lambda}
+M29 vb4 b VDD VDD pmos L=Lref W=W29 AS={4*lambda*W29} PS={2*W29+8*lambda} AD={4*lambda*W29} PD={2*W29+8*lambda}
+*M30 vb3 vb3 VDD VDD pmos L=Lref W=W30 AS={4*lambda*W30} PS={2*W30+8*lambda} AD={4*lambda*W30} PD={2*W30+8*lambda}
+*M31 vb4 vb4 VSS VSS nmos L=Lref W=W31 AS={4*lambda*W31} PS={2*W31+8*lambda} AD={4*lambda*W31} PD={2*W31+8*lambda}
+*M32 vb4 vbp VDD VDD pmos L=Lref W=W32 AS={4*lambda*W32} PS={2*W32+8*lambda} AD={4*lambda*W32} PD={2*W32+8*lambda}
+Rref1 s22 VSS 252k
+Rref2 vbn VSS 89282
+Rref3 vb1 VSS 69972
+Rref4 vb2 VSS 99580
+Rref5 vb3 VSS 17.33k
+Rref6 vb4 VSS 165500
+Vzero vbn vbp 0
+
+************************************************
+***************************************************************
+.ends Opamp1
+
+* Making OPAMP instance
+X1 vinn vinp vout VDD VSS Opamp1
+
+* Creating Voltage sources
+VDD1 VDD VSS dc 1.8
+VSS1 VSS GND dc 0
+
+**Adding the voltage source for input
+Vdn vinn vout dc 0 ac 0 
+Vdp vinp vx SIN(0 800m 5kHz)
+Vcm vx VSS dc 900m
+
+***************************************************************
+** Control Section
+.control
+***************************************************************
+
+*Transient Analysis
+tran 1u 1m
+plot v(vout)  
+plot v(vinp)
+
+***************************************************************
+
+.endc
+.end
